@@ -145,7 +145,7 @@ class NASAExoplanetArchive:
         uri_full = f"{base_url}{encoded_query}&format={query.get('format', 'csv')}"
 
         # Send the request
-        response = requests.get(uri_full, timeout=self.requests_timeout, verify=False)
+        response = requests.get(uri_full, timeout=self.requests_timeout)
 
         if dataframe:
             return pandas.read_csv(StringIO(response.text))
