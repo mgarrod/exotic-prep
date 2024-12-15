@@ -68,6 +68,10 @@ def main():
                 chartImgPath = aavsoData.getAAVSOChartImagePath()
                 fitsImage = aavsoData.getFITSImage()
 
+                # Open the two images
+                fitsImage = Image.open(fitsImage)
+                chartImgPath = Image.open(chartImgPath)
+
                 # Get the dimensions of the images
                 width1, height1 = fitsImage.size
                 width2, height2 = chartImgPath.size
