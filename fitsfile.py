@@ -65,9 +65,9 @@ class FitsFile:
 
         # Draw horizontal and vertical lines every 100 pixels
         for y in range(0, height, 100):
-            plt.axhline(y=y, color='grey', linestyle='--', alpha=0.5)
+            plt.axhline(y=y, color='grey', linestyle='--', alpha=0.75)
         for x in range(0, width, 100):
-            plt.axvline(x=x, color='grey', linestyle='--', alpha=0.5)
+            plt.axvline(x=x, color='grey', linestyle='--', alpha=0.75)
 
         # Draw plus markers at the specified coordinates with different colors
         for (x, y), color in zip(coordinates, colors):
