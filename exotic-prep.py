@@ -64,8 +64,8 @@ def main():
                 with open(json_file, 'w') as f:
                     f.write(json.dumps(jsonInit.obs_data))
 
-                chartImgPath = AAVSO.getAAVSOChartImagePath()
-                fitsImage = AAVSO.getFITSImage()
+                chartImgPath = aavsoData.getAAVSOChartImagePath()
+                fitsImage = aavsoData.getFITSImage()
 
             else:
                 print("No .gz file found in the directory")
