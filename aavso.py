@@ -38,7 +38,7 @@ class AAVSO:
 
     def getAAVSOChartImagePath(self):
 
-        response = requests.get(self.aavso_chart_url, verify=False)
+        response = requests.get(self.aavso_chart_url)
         if response.status_code == 200:
             aavso_outfile = self.config.output_dir + "AAVSO_" + self.starname + "_Chart.jpg"
             with open(aavso_outfile, "wb") as file:
@@ -72,7 +72,7 @@ class AAVSO:
         aavsourl = "https://apps.aavso.org/vsp/api/chart/?star=" + self.starname + "&scale=D&orientation=CCD&type=chart&fov=" + str(
             self.observatory.fov) + "&maglimit=" + str(self.observatory.maglimit) + "&resolution=" + str(
             self.observatory.resolution) + "&north=down&east=left&lines=True&format=json"
-        aavsores = requests.get(aavsourl, verify=False)
+        aavsores = requests.get(aavsourl)
         aavso = json.loads(aavsores.text)
 
         self.aavso_chart_url = aavso["image_uri"]
