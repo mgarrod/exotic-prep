@@ -38,7 +38,7 @@ class AAVSO:
 
     def getAAVSOChartImagePath(self):
 
-        response = requests.get(self.aavso_chart, verify=False)
+        response = requests.get(self.aavso_chart_url, verify=False)
         if response.status_code == 200:
             aavso_outfile = self.config.output_dir + "AAVSO_" + self.starname + "_Chart.jpg"
             with open(aavso_outfile, "wb") as file:
