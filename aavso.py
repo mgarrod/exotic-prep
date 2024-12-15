@@ -23,8 +23,6 @@ class AAVSO:
 
     def get_star_magnitude(self, starname):
 
-        return 13
-
         custom_simbad = Simbad()
         custom_simbad.add_votable_fields('flux(V)')
         result = custom_simbad.query_object(starname)
