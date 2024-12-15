@@ -7,6 +7,7 @@ from fitsfile import FitsFile
 from aavso import AAVSO
 
 import json
+from PIL import Image
 
 def main():
     try:
@@ -66,6 +67,30 @@ def main():
 
                 chartImgPath = aavsoData.getAAVSOChartImagePath()
                 fitsImage = aavsoData.getFITSImage()
+
+                # Get the dimensions of the images
+                width1, height1 = fitsImage.size
+                width2, height2 = chartImgPath.size
+
+                # Determine which image is smaller and resize it
+                if height1 < height2:
+                    new_width1 = int(width1 * (height2 / height1))
+                    fitsImage = fitsImage.resize((new_width1, height2))
+                else:
+                    new_width2 = int(width2 * (height1 / height2))
+                    chartImgPath = chartImgPath.resize((new_width2, height1))
+
+                # Create a new image with a width that is the sum of both images' widths and the height of the taller image
+                new_image = Image.new('RGB', (fitsImage.width + chartImgPath.width, max(height1, height2)))
+
+                # Paste the images into the new image
+                new_image.paste(fitsImage, (0, 0))
+                new_image.paste(chartImgPath, (fitsImage.width, 0))
+
+                # Save the new image
+                output_jpg = config.output_dir + star_name + "_combined_image.jpg"
+                new_image.save(output_jpg)
+                print(f"Combined image saved as {output_jpg}")
 
             else:
                 print("No .gz file found in the directory")
