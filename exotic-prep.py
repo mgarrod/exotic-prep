@@ -19,7 +19,11 @@ def main():
 
         # observatory data for json and aavso url
         obs_number = input(f"Select Observatory:\n1. Whipple\n2. CAS (not ready)\n(1-default):")
-        observatory = Observatory(int(obs_number), config)
+        try:
+            obs_number = int(obs_number)
+        except:
+            obs_number = 1
+        observatory = Observatory(obs_number, config)
         if observatory.observatoryJson is None:
             observatory = Observatory(1, config)
 
