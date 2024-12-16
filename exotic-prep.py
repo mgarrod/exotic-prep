@@ -27,7 +27,6 @@ def main():
         if filter == "":
             filter = "V"
         
-
         # planet data for json
         planet = input(f"Planet name (ex: TRES-3 b): ")
         #################!!!!!!!!!!!!!!!!!!!!!
@@ -37,12 +36,16 @@ def main():
         initplanet = NASAExoplanetArchive(planet=planet)
         pDict = initplanet.planet_info()
         planetObj = initplanet.planet_info(fancy=True)
-        
-        planet = pDict['pName']
+
+        # set the planet and star name to proper
+        planet = pDict['pName'].upper()
         star_name = pDict['sName']
 
         # replace observatory data with config params
         if observatory.obs_data is not None:
+
+            # set the filter in the json
+            observatory.setObservationFilter(filter)
 
             jsonInit = ExoticJsonInit(observatory.obs_data, config)
             jsonInit.setUserInfoJsonData(planet)
