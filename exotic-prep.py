@@ -42,7 +42,7 @@ def main():
         planetObj = initplanet.planet_info(fancy=True)
 
         # set the planet and star name to proper
-        print(planetObj)
+        print(type(planetObj))
         print(planetObj["Planet Name"])
         planet = planetObj["Planet Name"].upper()
         star_name = planetObj["Host Star Name"]
