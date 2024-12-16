@@ -18,7 +18,7 @@ def main():
         # get minimal input for observatory and planet
 
         # observatory data for json and aavso url
-        obs_number = input(f"Observatories:\n          1. Whipple (default)\nChoose an observatory:")
+        obs_number = input(f"Observatories:\n          1. Whipple (default)\n\nChoose an observatory:")
         try:
             obs_number = int(obs_number)
         except:
