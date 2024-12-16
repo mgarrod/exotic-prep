@@ -55,7 +55,7 @@ class AstroConfig:
         return self._aavso_observer_code
 
     @aavso_observer_code.setter
-    def obs_code(self, value):
+    def aavso_observer_code(self, value):
         self._aavso_observer_code = value
 
     @property
