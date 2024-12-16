@@ -43,7 +43,8 @@ def main():
 
         # set the planet and star name to proper
         planetJson = json.loads(planetObj)
-        planet = planetJson["Planet Name"].upper()
+        planet = planetJson["Planet Name"]
+        planet = planet[:-1].upper() + planet[-1]
         star_name = planetJson["Host Star Name"]
 
         # replace observatory data with config params
