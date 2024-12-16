@@ -30,6 +30,9 @@ class Observatory:
             obs_data = json.load(rawjson)
         return obs_data
 
+    def setObservationFilter(self, filter):
+        self.obs_data["user_info"]["Filter Name (aavso.org/filters)"] = filter
+
     def setObservationDate(self, date_obs):
         self.obs_data["user_info"]["Observation date"] = date_obs
 
