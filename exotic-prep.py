@@ -38,7 +38,7 @@ def main():
         planetObj = initplanet.planet_info(fancy=True)
 
         # set the planet and star name to proper
-        print(pDict['pName'])
+        print(pDict)
         planet = pDict['pName'].upper()
         star_name = pDict['sName']
 
