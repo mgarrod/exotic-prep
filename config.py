@@ -9,7 +9,7 @@ class AstroConfig:
         config = self.load_config(self.pyfile_dir + "/config.ini")
         self.fits_files_dir = config.get("REQUIRED", "fits_files_dir")
         self.output_dir = config.get("REQUIRED", "output_dir")
-        self.obs_code = config.get("REQUIRED", "obs_code")
+        self.aavso_observer_code = config.get("REQUIRED", "aavso_observer_code")
         self.ast_api_key = config.get("REQUIRED", "ast_api_key")
         self.flats = config.get("OPTIONAL", "flats")
         self.darks = config.get("OPTIONAL", "darks")
@@ -52,11 +52,11 @@ class AstroConfig:
 
     @property
     def obs_code(self):
-        return self._obs_code
+        return self.aavso_observer_code
 
-    @obs_code.setter
+    @aavso_observer_code.setter
     def obs_code(self, value):
-        self._obs_code = value
+        self.aavso_observer_code = value
 
     @property
     def ast_api_key(self):
