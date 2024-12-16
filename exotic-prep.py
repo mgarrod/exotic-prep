@@ -42,9 +42,8 @@ def main():
         planetObj = initplanet.planet_info(fancy=True)
 
         # set the planet and star name to proper
-        print(pDict)
-        planet = pDict['pName'].upper()
-        star_name = pDict['sName']
+        planet = planetObj["Planet Name"].upper()
+        star_name = planetObj["Host Star Name"]
 
         # replace observatory data with config params
         if observatory.obs_data is not None:
