@@ -51,7 +51,7 @@ class AstroConfig:
         self._output_dir = value
 
     @property
-    def obs_code(self):
+    def aavso_observer_code(self):
         return self.aavso_observer_code
 
     @aavso_observer_code.setter
