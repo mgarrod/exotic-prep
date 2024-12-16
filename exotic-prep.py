@@ -23,6 +23,11 @@ def main():
         if observatory.observatoryJson is None:
             observatory = Observatory(1, config)
 
+        filter = input(f"Filter (V-default):")
+        if filter == "":
+            filter = "V"
+        
+
         # planet data for json
         planet = input(f"Planet name (ex: TRES-3 b): ")
         #################!!!!!!!!!!!!!!!!!!!!!
