@@ -32,9 +32,9 @@ def main():
         initplanet = NASAExoplanetArchive(planet=planet)
         pDict = initplanet.planet_info()
         planetObj = initplanet.planet_info(fancy=True)
-
-        # this relies on the planet being entered correctly
-        star_name = planet.split(" ")[0]
+        
+        planet = pDict['pName']
+        star_name = pDict['sName']
 
         # replace observatory data with config params
         if observatory.obs_data is not None:
