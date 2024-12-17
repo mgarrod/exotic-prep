@@ -78,7 +78,7 @@ class FitsFile:
         # Draw plus markers at the specified coordinates with different colors
         for (x, y), color, magnitude in zip(coordinates, colors, compmagarray):
             ax.plot(x, y, marker='+', color=color, markersize=20, markeredgewidth=0.5, alpha=1.0)
-            plt.text(x+5, y+5, str(mag).replace(".",""), fontsize=7, color="black")
+            plt.text(x+5, y+5, str(magnitude).replace(".",""), fontsize=7, color="black")
 
         # Save the figure as a PNG file
         plt.savefig(output_png)
