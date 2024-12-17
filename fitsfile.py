@@ -2,7 +2,7 @@ from astropy.io import fits
 import os
 from datetime import datetime
 import matplotlib.pyplot as plt
-from astropy.visualization import (MinMaxInterval, SqrtStretch, LinearStretch, AsinhStretch, HistEqStretch, LogStretch, ImageNormalize)
+from astropy.visualization import (MinMaxInterval, SqrtStretch, LinearStretch, AsinhStretch, HistEqStretch, LogStretch, ImageNormalize, AsymmetricPercentileInterval)
 
 class FitsFile:
     def __init__(self, config):
@@ -55,7 +55,8 @@ class FitsFile:
         # Create a figure and axis
         fig, ax = plt.subplots()
 
-        norm = ImageNormalize(image_data, interval=MinMaxInterval(), stretch=HistEqStretch(image_data))
+        # norm = ImageNormalize(image_data, interval=MinMaxInterval(), stretch=HistEqStretch(image_data))
+        norm = ImageNormalize(image_data, interval=AsymmetricPercentileInterval(80,99), stretch=LinearStretch())
 
         plt.title(starname)
 
@@ -66,7 +67,7 @@ class FitsFile:
                    facecolor='lightgrey', bbox_to_anchor=(1.15, 1.15))
 
         # Display the FITS image data
-        plt.imshow(image_data, norm=norm, origin='lower')  # , cmap='gray')
+        plt.imshow(image_data, norm=norm, origin='lower', cmap='gray')
 
         # Draw horizontal and vertical lines every 100 pixels
         for y in range(0, height, 100):
