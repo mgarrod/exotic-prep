@@ -66,7 +66,7 @@ def main():
                 observatory.setObservationDate(date_obs)
 
                 aavsoData = AAVSO(config, star_name, observatory, fitsFileObject)
-                targetarray, comparray = aavsoData.getTargetCompArray()
+                targetarray, comparray, compmagarray = aavsoData.getTargetCompArray()
 
                 if targetarray is not None and comparray is not None:
                     observatory.setTargetCompData(targetarray, comparray)
