@@ -54,7 +54,7 @@ class AAVSO:
     def getFITSImage(self):
 
         comparraycolor = ["red"] * len(self.comparray)
-        comparraycolor.insert(0, "black")
+        comparraycolor.insert(0, "green")
 
         comparraytmp = self.comparray
         comparraytmp.insert(0, self.targetarray)
