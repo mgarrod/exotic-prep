@@ -61,7 +61,7 @@ class FitsFile:
         plt.title(starname)
 
         # Add dummy plots for the legend
-        plt.plot([], [], 'k+', label='Target Star')
+        plt.plot([], [], 'g+', label='Target Star')
         plt.plot([], [], 'r+', label='Comp Stars')
         plt.legend(loc='upper right', frameon=True, shadow=True,
                    facecolor='lightgrey', bbox_to_anchor=(1.15, 1.15))
