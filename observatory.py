@@ -13,13 +13,15 @@ class Observatory:
                 "observatoryJson": "whipple.json",
                 "fov": 56.44,
                 "maglimit": 15,
-                "resolution": 150
+                "resolution": 150,
+                "scale": "D"
             },
             2: {
                 "observatoryJson": "cas.json",
                 "fov": -1,
                 "maglimit": -1,
-                "resolution": -1
+                "resolution": -1,
+                "scale": "D"
             }
         }
         return data.get(obs_number, {})
