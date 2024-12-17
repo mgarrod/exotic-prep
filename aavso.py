@@ -89,6 +89,22 @@ class AAVSO:
 
         width, height = self.fitsFileObject.get_fits_image_dimensions()
 
+        # example of another way to get x,y
+        # from astropy.coordinates import SkyCoord
+        # hdulist = fits.open(first_fits_file)
+        # wcs = WCS(hdulist[0].header)
+        # if not wcs.has_celestial:
+        #     raise ValueError("WCS should contain celestial component")
+        # # Define the RA and Dec
+        # ra = '20h15m22.625s'
+        # dec = '65d01m18.57s'
+        # # Convert RA and Dec to SkyCoord object
+        # sky_coord = SkyCoord(ra, dec, unit=(u.hourangle, u.deg))
+        # # Convert SkyCoord to pixel coordinates
+        # x, y = sky_coord.to_pixel(wcs)
+        # print(x)
+        # print(y)
+
         wcs_header = self.fitsFileObject.get_fits_header()
         if not WCS(wcs_header).has_celestial:
             try_again = True
