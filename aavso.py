@@ -70,7 +70,7 @@ class AAVSO:
         magnitude = self.get_star_magnitude(self.starname)
         print(f"Star magnitude: {magnitude}")
 
-        aavsourl = "https://apps.aavso.org/vsp/api/chart/?star=" + self.starname + "&scale=D&orientation=CCD&type=chart&fov=" + str(
+        aavsourl = "https://apps.aavso.org/vsp/api/chart/?star=" + self.starname + "&scale=" + self.observatory.scale + "&orientation=CCD&type=chart&fov=" + str(
             self.observatory.fov) + "&maglimit=" + str(self.observatory.maglimit) + "&resolution=" + str(
             self.observatory.resolution) + "&north=down&east=left&lines=True&format=json"
         aavsores = requests.get(aavsourl)
