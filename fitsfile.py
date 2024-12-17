@@ -20,14 +20,19 @@ class FitsFile:
 
     def get_observation_date(self):
         date_format = "%Y-%m-%dT%H:%M:%S.%f%z"
+        header = self.get_fits_header()
+
+        observation_date = header.get('DATE-OBS')
+        observation_date = datetime.strptime(observation_date, date_format)
+        return observation_date.strftime("%Y-%m-%d")
+
+    def get_fits_header(self):
         with fits.open(self.first_fits_file) as hdul:
             try:
                 header = hdul.header
             except:
                 header = hdul[0].header
-            observation_date = header.get('DATE-OBS')
-            observation_date = datetime.strptime(observation_date, date_format)
-            return observation_date.strftime("%Y-%m-%d")
+            return header
 
     def get_fits_image_dimensions(self):
         with fits.open(self.first_fits_file) as hdul:
