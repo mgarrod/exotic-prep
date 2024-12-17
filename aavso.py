@@ -7,6 +7,7 @@ import requests
 import json
 import numpy as np
 
+
 class AAVSO:
     def __init__(self, config, starname, observatory, fitsFileObject):
 
@@ -73,14 +74,14 @@ class AAVSO:
             self.observatory.fov) + "&maglimit=" + str(self.observatory.maglimit) + "&resolution=" + str(
             self.observatory.resolution) + "&north=down&east=left&lines=True&format=json"
         aavsores = requests.get(aavsourl)
-        
+
         aavso = None
         try:
             aavso = json.loads(aavsores.text)
         except:
             print("Error getting data from AAVSO. Their site may be down. Please try again later.")
             exit(0)
-            
+
         self.aavso_chart_url = aavso["image_uri"]
 
         target_ra = aavso["ra"]
@@ -88,18 +89,21 @@ class AAVSO:
 
         width, height = self.fitsFileObject.get_fits_image_dimensions()
 
-        try_again = True
-        submission_id = None
-        while try_again:
-            try:
-                if not submission_id:
-                    wcs_header = self.ast.solve_from_image(self.fitsFileObject.first_fits_file, submission_id=submission_id)
+        wcs_header = self.fitsFileObject.get_fits_header()
+        if not WCS(wcs_header).has_celestial:
+            try_again = True
+            submission_id = None
+            while try_again:
+                try:
+                    if not submission_id:
+                        wcs_header = self.ast.solve_from_image(self.fitsFileObject.first_fits_file,
+                                                               submission_id=submission_id)
+                    else:
+                        wcs_header = self.ast.monitor_submission(submission_id, solve_timeout=120)
+                except TimeoutError as e:
+                    submission_id = e.args[1]
                 else:
-                    wcs_header = self.ast.monitor_submission(submission_id, solve_timeout=120)
-            except TimeoutError as e:
-                submission_id = e.args[1]
-            else:
-                try_again = False
+                    try_again = False
 
         if wcs_header:
             print("\n")
@@ -160,5 +164,3 @@ class AAVSO:
         else:
             print("Could not find enough comp stars (empty header)")
             return None, None
-
-
