@@ -75,6 +75,7 @@ class FitsFile:
         for x in range(0, width, 100):
             plt.axvline(x=x, color='grey', linestyle='--', alpha=0.75, linewidth=0.5)
 
+        print(compmagarray)
         # Draw plus markers at the specified coordinates with different colors
         for (x, y), color, magnitude in zip(coordinates, colors, compmagarray):
             ax.plot(x, y, marker='+', color=color, markersize=20, markeredgewidth=0.5, alpha=1.0)
