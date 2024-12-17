@@ -58,3 +58,7 @@ class Observatory:
     def resolution(self):
         return self.data.get("resolution", None)
 
+    @property
+    def scale(self):
+        return self.data.get("scale", None)
+
