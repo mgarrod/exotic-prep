@@ -43,7 +43,7 @@ class FitsFile:
             height, width = data.shape
             return width, height
 
-    def convert_fits_to_png_with_markers(self, output_png, coordinates, colors, starname):
+    def convert_fits_to_png_with_markers(self, output_png, coordinates, colors, compmagarray, starname):
         # Set the backend to Agg
 
         plt.switch_backend('Agg')
@@ -76,8 +76,9 @@ class FitsFile:
             plt.axvline(x=x, color='grey', linestyle='--', alpha=0.75, linewidth=0.5)
 
         # Draw plus markers at the specified coordinates with different colors
-        for (x, y), color in zip(coordinates, colors):
+        for (x, y), color, magnitude in zip(coordinates, colors, mag):
             ax.plot(x, y, marker='+', color=color, markersize=20, markeredgewidth=0.5, alpha=1.0)
+            plt.text(x+5, y+5, str(mag).replace(".",""), fontsize=7, color="black")
 
         # Save the figure as a PNG file
         plt.savefig(output_png)
