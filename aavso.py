@@ -18,6 +18,7 @@ class AAVSO:
 
         self.targetarray = None
         self.comparray = None
+        self.compmagarray = None
         self.ast = AstrometryNet()
         self.ast.api_key = self.config.ast_api_key
         self.aavso_chart_url = None
@@ -127,7 +128,7 @@ class AAVSO:
 
             self.targetarray = []
             self.comparray = []
-            compmagarray = []
+            self.compmagarray = []
 
             ra_deg, dec_deg = self.convert_to_decimal_degrees(target_ra, target_dec)
             x, y = wcs.all_world2pix(ra_deg, dec_deg, 0)
@@ -145,24 +146,24 @@ class AAVSO:
                             if int(np.round(x)) > 0 and int(np.round(y)) > 0 and int(np.round(x)) < width and int(
                                     np.round(y)) < height:
                                 self.comparray.append([int(np.round(x)), int(np.round(y))])
-                                compmagarray.append(band["mag"])
+                                self.compmagarray.append(band["mag"])
 
                 except:
                     continue
 
             self.comparray = np.array(self.comparray)
-            compmagarray = np.array(compmagarray)
+            self.compmagarray = np.array(self.compmagarray)
             # print(targetarray)
             # print(comparray)
 
             initvalue = 0.5
             if not isinstance(magnitude, (int, float)):
-                magnitude = np.mean(compmagarray)
-            indexes = np.where((compmagarray >= magnitude - initvalue) & (compmagarray <= magnitude + initvalue))
+                magnitude = np.mean(self.compmagarray)
+            indexes = np.where((self.compmagarray >= magnitude - initvalue) & (self.compmagarray <= magnitude + initvalue))
             indexes = np.array(indexes[0])
             while len(indexes) < 2:
                 initvalue += 0.1
-                indexes = np.where((compmagarray >= magnitude - initvalue) & (compmagarray <= magnitude + initvalue))
+                indexes = np.where((self.compmagarray >= magnitude - initvalue) & (self.compmagarray <= magnitude + initvalue))
                 indexes = np.array(indexes[0])
                 if initvalue > 5:
                     break
@@ -171,7 +172,10 @@ class AAVSO:
                 self.comparray = self.comparray[indexes]
                 self.comparray = self.comparray.tolist()
 
-                return self.targetarray, self.comparray
+                self.compmagarray = self.compmagarray[indexes]
+                self.compmagarray = self.compmagarray.tolist()
+
+                return self.targetarray, self.comparray, self.compmagarray
 
             else:
                 print("Could not find enough comp stars")
