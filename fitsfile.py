@@ -80,7 +80,7 @@ class FitsFile:
         for (x, y), color, magnitude in zip(coordinates, colors, compmagarray):
             ax.plot(x, y, marker='+', color=color, markersize=20, markeredgewidth=0.5, alpha=1.0)
             #plt.text(x+5, y+5, str(magnitude).replace(".",""), fontsize=5, color="black")
-            plt.text(x+5, y+5, "(" + str(x) + " " + str"(y) + ")", fontsize=5, color=color)
+            plt.text(x+5, y+5, "(" + str(x) + " " + str(y) + ")", fontsize=5, color=color)
 
         # Save the figure as a PNG file
         plt.savefig(output_png)
