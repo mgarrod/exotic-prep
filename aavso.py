@@ -73,8 +73,14 @@ class AAVSO:
             self.observatory.fov) + "&maglimit=" + str(self.observatory.maglimit) + "&resolution=" + str(
             self.observatory.resolution) + "&north=down&east=left&lines=True&format=json"
         aavsores = requests.get(aavsourl)
-        aavso = json.loads(aavsores.text)
-
+        
+        aavso = None
+        try:
+            aavso = json.loads(aavsores.text)
+        except:
+            print("Error getting data from AAVSO. Their site may be down. Please try again later.")
+            exit(0)
+            
         self.aavso_chart_url = aavso["image_uri"]
 
         target_ra = aavso["ra"]
