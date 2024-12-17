@@ -67,13 +67,13 @@ class FitsFile:
                    facecolor='lightgrey', bbox_to_anchor=(1.15, 1.15))
 
         # Display the FITS image data
-        plt.imshow(image_data, norm=norm, origin='lower', cmap='gray')
+        plt.imshow(image_data, norm=norm, origin='lower', cmap='gray_r')
 
         # Draw horizontal and vertical lines every 100 pixels
         for y in range(0, height, 100):
-            plt.axhline(y=y, color='grey', linestyle='--', alpha=0.75)
+            plt.axhline(y=y, color='grey', linestyle='--', alpha=0.75, linewidth=0.5)
         for x in range(0, width, 100):
-            plt.axvline(x=x, color='grey', linestyle='--', alpha=0.75)
+            plt.axvline(x=x, color='grey', linestyle='--', alpha=0.75, linewidth=0.5)
 
         # Draw plus markers at the specified coordinates with different colors
         for (x, y), color in zip(coordinates, colors):
