@@ -28,6 +28,8 @@ class AAVSO:
         custom_simbad = Simbad()
         custom_simbad.add_votable_fields('flux(V)')
         result = custom_simbad.query_object(starname)
+        print(starname)
+        print(result)
         if result is None:
             return result
         magnitude = None
