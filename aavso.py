@@ -30,7 +30,11 @@ class AAVSO:
         result = custom_simbad.query_object(starname)
         if result is None:
             return result
-        magnitude = result['FLUX_V']
+        magnitude = None
+        try:
+            result['FLUX_V'][0]
+        except:
+            magnitude = None
         return magnitude
 
     def convert_to_decimal_degrees(self, ra_str, dec_str):
@@ -157,7 +161,7 @@ class AAVSO:
             # print(comparray)
 
             initvalue = 0.5
-            if not isinstance(magnitude, (int, float)):
+            if not isinstance(magnitude, np.float32):
                 magnitude = np.mean(self.compmagarray)
             indexes = np.where((self.compmagarray >= magnitude - initvalue) & (self.compmagarray <= magnitude + initvalue))
             indexes = np.array(indexes[0])
