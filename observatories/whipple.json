@@ -14,8 +14,8 @@
         "Obs. Longitude": "-110.73",
         "Obs. Elevation (meters)": 2606,
         "Camera Type (CCD or DSLR)": "CCD",
-        "Pixel Binning": "1x1",
-        "Filter Name (aavso.org/filters)": "V",
+        "Pixel Binning": "2x2",
+        "Filter Name (aavso.org/filters)": "MObs CV",
         "Observing Notes": "",
 
         "Plate Solution? (y/n)": "y",
