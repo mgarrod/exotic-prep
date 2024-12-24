@@ -75,8 +75,6 @@ def main():
                 # save planet data to disk
                 json_file = config.fits_files_dir + planet.replace(" ", "") + "_" + date_obs + "_inits.json"
                 # print(obs_data)
-                exotic_cmd = "exotic -red " + json_file + " -ov"
-                print("Use this command to run exotic:\n" + exotic_cmd)
                 with open(json_file, 'w') as f:
                     f.write(json.dumps(jsonInit.obs_data))
 
@@ -109,7 +107,10 @@ def main():
                 # Save the new image
                 output_jpg = config.output_dir + star_name + "_combined_image.jpg"
                 new_image.save(output_jpg)
-                print(f"Combined image saved as {output_jpg}")
+                print(f"\nCombined image saved as {output_jpg}\n")
+
+                exotic_cmd = "exotic -red " + json_file + " -ov"
+                print("Use this command to run exotic:\n" + exotic_cmd)
 
             else:
                 print("No .gz file found in the directory")
