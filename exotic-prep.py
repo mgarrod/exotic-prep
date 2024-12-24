@@ -107,10 +107,11 @@ def main():
                 # Save the new image
                 output_jpg = config.output_dir + star_name + "_combined_image.jpg"
                 new_image.save(output_jpg)
-                print(f"\nCombined image saved as {output_jpg}\n")
+                print("###########################################################\nCombined image saved as {output_jpg}\n")
 
                 exotic_cmd = "exotic -red " + json_file + " -ov"
-                print("Use this command to run exotic:\n" + exotic_cmd)
+                print("Use this command to run exotic:\n" + exotic_cmd + "\n")
+                print("###########################################################")
 
             else:
                 print("No .gz file found in the directory")
