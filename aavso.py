@@ -49,7 +49,7 @@ class AAVSO:
             aavso_outfile = self.config.output_dir + "AAVSO_" + self.starname + "_Chart.jpg"
             with open(aavso_outfile, "wb") as file:
                 file.write(response.content)
-            print(f"AAVSO image saved as {aavso_outfile}")
+            #print(f"AAVSO image saved as {aavso_outfile}")
 
             return aavso_outfile
         else:
