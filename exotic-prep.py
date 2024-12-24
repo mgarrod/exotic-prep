@@ -75,7 +75,8 @@ def main():
                 # save planet data to disk
                 json_file = config.fits_files_dir + planet.replace(" ", "") + "_" + date_obs + "_inits.json"
                 # print(obs_data)
-                print("Use this file path when EXOTIC asks for a json file:\n" + json_file)
+                exotic_cmd = "exotic -red " + json_file + " -ov"
+                print("Use this command to run exotic:\n" + exotic_cmd)
                 with open(json_file, 'w') as f:
                     f.write(json.dumps(jsonInit.obs_data))
 
