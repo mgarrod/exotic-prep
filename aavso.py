@@ -66,7 +66,7 @@ class AAVSO:
 
         output_png = self.config.output_dir + self.starname + "_and_comp_coordinates.png"
         self.fitsFileObject.convert_fits_to_png_with_markers(output_png, comparraytmp, comparraycolor, self.compmagarray, self.starname)
-        print(f"Target and Comp Star image saved as {output_png}")
+        #print(f"Target and Comp Star image saved as {output_png}")
 
         return output_png
 
