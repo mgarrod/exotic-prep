@@ -107,7 +107,7 @@ def main():
                 # Save the new image
                 output_jpg = config.output_dir + star_name + "_combined_image.jpg"
                 new_image.save(output_jpg)
-                print("###########################################################\n\nCombined image saved as {output_jpg}\n")
+                print("###########################################################\n\nCombined image saved as " + output_jpg + "\n")
 
                 exotic_cmd = "exotic -red " + json_file + " -ov"
                 print("Use this command to run exotic:\n" + exotic_cmd + "\n")
