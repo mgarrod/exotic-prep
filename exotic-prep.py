@@ -42,7 +42,7 @@ def main():
         #planet = "WASP-43 b"
 
         # get dir where files are
-        fitsDir = input(f"\nFolder Name where the FITS files for " + planet + " are located.\n(The folder should be located here: " + config.fits_files_dir + "):")
+        fitsDir = input(f"\nFolder Name where the FITS files for " + planet + " are located.\n(The folder should be located in this directory: " + config.fits_files_dir + "):")
         #################!!!!!!!!!!!!!!!!!!!!!
         # remove this
         #fitsDir = "WASP-43 b"
