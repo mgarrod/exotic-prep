@@ -91,6 +91,7 @@ def main():
 
             fitsFileObject = FitsFile(config)
             fitsFile = fitsFileObject.find_first_gz_file(config.fits_files_dir)
+            print(fitsFile)
 
             if fitsFile:
 
