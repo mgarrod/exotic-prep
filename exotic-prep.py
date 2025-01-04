@@ -9,8 +9,8 @@ from aavso import AAVSO
 import json
 from PIL import Image
 
+import os
 # remove
-# import os
 # os.environ["REQUESTS_CA_BUNDLE"] = "/Users/mgarrod/Development/certs/ca4.cer"
 
 def main():
