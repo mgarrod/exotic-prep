@@ -12,7 +12,9 @@ class FitsFile:
         self.first_fits_file = None
 
     def find_first_gz_file(self, directory):
-        for filename in os.listdir(directory):
+        files = os.listdir(directory)
+        files.sort()
+        for filename in files:
             if filename.endswith('.gz'):
                 self.first_fits_file = os.path.join(directory, filename)
                 return self.first_fits_file
