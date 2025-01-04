@@ -7,19 +7,14 @@ class AstroConfig:
         self._pyfile_dir = os.path.dirname(os.path.abspath(__file__))
 
         config = self.load_config(self.pyfile_dir + "/config.ini")
-        self.fits_files_dir = config.get("REQUIRED", "fits_files_dir")
-        self.output_dir = config.get("REQUIRED", "output_dir")
+        self.fits_files_dir = config.get("REQUIRED", "base_fits_files_dir")
+        self.output_dir = ""
         self.aavso_observer_code = config.get("REQUIRED", "aavso_observer_code")
         self.ast_api_key = config.get("REQUIRED", "ast_api_key")
-        self.flats = config.get("OPTIONAL", "flats")
-        self.darks = config.get("OPTIONAL", "darks")
-        self.biases = config.get("OPTIONAL", "biases")
-        if (self.flats == "None"):
-            self.flats = None
-        if (self.darks == "None"):
-            self.darks = None
-        if (self.biases == "None"):
-            self.biases = None
+
+        self.flats = False
+        self.darks = False
+        self.biases = False
 
     def load_config(self, config_file):
         config = configparser.ConfigParser()

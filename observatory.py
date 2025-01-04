@@ -1,4 +1,5 @@
 import json
+import os
 
 class Observatory:
     def __init__(self, obs_number, config):
@@ -28,7 +29,7 @@ class Observatory:
 
     def getObservatoryJson(self):
         obs_data = None
-        with open(self.config.pyfile_dir + "/observatories/" + self.observatoryJson, "r") as rawjson:
+        with open(os.path.join(self.config.pyfile_dir, "observatories", self.observatoryJson), "r") as rawjson:
             obs_data = json.load(rawjson)
         return obs_data
 

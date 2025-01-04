@@ -6,7 +6,7 @@ from astroquery.astrometry_net import AstrometryNet
 import requests
 import json
 import numpy as np
-
+import os
 
 class AAVSO:
     def __init__(self, config, starname, observatory, fitsFileObject):
@@ -46,7 +46,7 @@ class AAVSO:
 
         response = requests.get(self.aavso_chart_url)
         if response.status_code == 200:
-            aavso_outfile = self.config.output_dir + "AAVSO_" + self.starname + "_Chart.jpg"
+            aavso_outfile = os.path.join(self.config.output_dir, "AAVSO_" + self.starname + "_Chart.jpg")
             with open(aavso_outfile, "wb") as file:
                 file.write(response.content)
             #print(f"AAVSO image saved as {aavso_outfile}")
@@ -64,7 +64,7 @@ class AAVSO:
         comparraytmp = self.comparray
         comparraytmp.insert(0, self.targetarray)
 
-        output_png = self.config.output_dir + self.starname + "_and_comp_coordinates.png"
+        output_png = os.path.join(self.config.output_dir, self.starname + "_and_comp_coordinates.png")
         self.fitsFileObject.convert_fits_to_png_with_markers(output_png, comparraytmp, comparraycolor, self.compmagarray, self.starname)
         #print(f"Target and Comp Star image saved as {output_png}")
 

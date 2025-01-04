@@ -9,6 +9,10 @@ from aavso import AAVSO
 import json
 from PIL import Image
 
+# remove
+# import os
+# os.environ["REQUESTS_CA_BUNDLE"] = "/Users/mgarrod/Development/certs/ca4.cer"
+
 def main():
     try:
 
@@ -18,7 +22,7 @@ def main():
         # get minimal input for observatory and planet
 
         # observatory data for json and aavso url
-        obs_number = input(f"Observatories:\n          1. Whipple (default)\n\nChoose an observatory:")
+        obs_number = input(f"\nObservatories:\n          1. Whipple (default)\n\nChoose an observatory:")
         try:
             obs_number = int(obs_number)
         except:
@@ -27,15 +31,44 @@ def main():
         if observatory.observatoryJson is None:
             observatory = Observatory(1, config)
 
-        filter = input(f"Filter (default: MObs CV):")
+        filter = input(f"\nFilter (default: MObs CV):")
         if filter == "":
             filter = "MObs CV"
-        
+
         # planet data for json
-        planet = input(f"Planet name (ex: TRES-3 b): ")
+        planet = input(f"\nPlanet name (ex: TRES-3 b): ")
         #################!!!!!!!!!!!!!!!!!!!!!
         # remove this
-        # planet = "WASP-43 b"
+        #planet = "WASP-43 b"
+
+        # get dir where files are
+        fitsDir = input(f"\nFolder Name where the FITS files for " + planet + " are located.\n(The folder should be located here: " + config.fits_files_dir + "):")
+        #################!!!!!!!!!!!!!!!!!!!!!
+        # remove this
+        #fitsDir = "WASP-43 b"
+
+        # calibration
+        print("\nIf there are calibration FITS files, they need to be inside folders named: flats, darks, and biases")
+        flats = input(f"Are there flat calibration images (default: no)? (y/n):")
+        if flats.lower() == "y" or flats.lower() == "yes":
+            config.flats = True
+        darks = input(f"Are there dark calibration images (default: no)? (y/n):")
+        if darks.lower() == "y" or darks.lower() == "yes":
+            config.darks = True
+        biases = input(f"Are there bias calibration images (default: no)? (y/n):")
+        if biases.lower() == "y" or biases.lower() == "yes":
+            config.biases = True
+
+        config.fits_files_dir = os.path.join(config.fits_files_dir, fitsDir)
+
+        # set output
+        config.output_dir = os.path.join(config.fits_files_dir, "output")
+        if not os.path.isdir(config.output_dir):
+            try:
+                os.makedirs(config.output_dir)
+            except:
+                print("Error creating output directory in " + config.fits_files_dir + ". Please verify your settings in config.ini are correct.")
+
         # get planet data
         initplanet = NASAExoplanetArchive(planet=planet)
         pDict = initplanet.planet_info()
@@ -44,7 +77,6 @@ def main():
         # set the planet and star name to proper
         planetJson = json.loads(planetObj)
         planet = planetJson["Planet Name"]
-        planet = planet[:-1].upper() + planet[-1]
         star_name = planetJson["Host Star Name"]
 
         # replace observatory data with config params
@@ -58,7 +90,7 @@ def main():
             jsonInit.setPlanetJsonData(planetObj)
 
             fitsFileObject = FitsFile(config)
-            fitsFile = fitsFileObject.find_first_gz_file(config.fits_files_dir + planet.replace(" ", "") + "/")
+            fitsFile = fitsFileObject.find_first_gz_file(config.fits_files_dir)
 
             if fitsFile:
 
@@ -73,7 +105,7 @@ def main():
 
                 # print(json.dumps(jsonInit.obs_data))
                 # save planet data to disk
-                json_file = config.fits_files_dir + planet.replace(" ", "") + "_" + date_obs + "_inits.json"
+                json_file = os.path.join(config.output_dir, planet.replace(" ", "") + "_" + date_obs + "_inits.json")
                 # print(obs_data)
                 with open(json_file, 'w') as f:
                     f.write(json.dumps(jsonInit.obs_data))
@@ -105,11 +137,11 @@ def main():
                 new_image.paste(chartImgPath, (fitsImage.width, 0))
 
                 # Save the new image
-                output_jpg = config.output_dir + star_name + "_combined_image.jpg"
+                output_jpg = os.path.join(config.output_dir, star_name + "_combined_image.jpg")
                 new_image.save(output_jpg)
-                print("###########################################################\n\nCombined image saved as " + output_jpg + "\n")
+                print("###########################################################\n\nCombined image saved as \"" + output_jpg + "\"\n")
 
-                exotic_cmd = "exotic -red " + json_file + " -ov"
+                exotic_cmd = "exotic -red \"" + json_file + "\" -ov"
                 print("Use this command to run exotic:\n" + exotic_cmd + "\n")
                 print("###########################################################")
 
