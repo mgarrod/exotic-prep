@@ -48,7 +48,7 @@ def main():
         #fitsDir = "WASP-43 b"
 
         # calibration
-        print("\nIf there are calibration FITS files, they need to be inside folders named: flats, darks, and biases")
+        print("\nIf there are calibration FITS files, they need to be inside folders named: flats, darks, and biases. These folders should be inside the " + fitsDir + " directory.")
         flats = input(f"Are there flat calibration images (default: no)? (y/n):")
         if flats.lower() == "y" or flats.lower() == "yes":
             config.flats = True
