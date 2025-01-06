@@ -49,6 +49,10 @@ def main():
 
         config.fits_files_dir = os.path.join(config.fits_files_dir, fitsDir)
 
+        if not os.path.isdir(config.fits_files_dir):
+            print("Invalid Folder Name for the FITS files")
+            exit(0)
+
         # calibration
         if os.path.isdir(os.path.join(config.fits_files_dir, "flats")):
             config.flats = True
