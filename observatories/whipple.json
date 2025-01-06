@@ -10,12 +10,12 @@
         "Secondary Observer Codes (N/A if none)": "N/A",
 
         "Observation date": null,
-        "Obs. Latitude": "+37.04",
-        "Obs. Longitude": "-110.73",
-        "Obs. Elevation (meters)": 2606,
+        "Obs. Latitude": "+31.68",
+        "Obs. Longitude": "-110.88",
+        "Obs. Elevation (meters)": 1268,
         "Camera Type (CCD or DSLR)": "CCD",
         "Pixel Binning": "1x1",
-        "Filter Name (aavso.org/filters)": "MObs CV",
+        "Filter Name (aavso.org/filters)": "CV",
         "Observing Notes": "",
 
         "Plate Solution? (y/n)": "y",
