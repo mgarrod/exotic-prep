@@ -11,7 +11,7 @@ from PIL import Image
 
 import os
 # remove
-os.environ["REQUESTS_CA_BUNDLE"] = "/Users/mgarrod/Development/certs/ca4.cer"
+#os.environ["REQUESTS_CA_BUNDLE"] = "/Users/mgarrod/Development/certs/ca4.cer"
 
 def main():
     try:
