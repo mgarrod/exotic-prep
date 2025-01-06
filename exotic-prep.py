@@ -31,7 +31,7 @@ def main():
         if observatory.observatoryJson is None:
             observatory = Observatory(1, config)
 
-        filter = input(f"\nFilter (default: MObs CV):")
+        filter = input(f"\nFilter (default: CV):")
         if filter == "":
             filter = "MObs CV"
 
