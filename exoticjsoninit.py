@@ -13,7 +13,7 @@ class ExoticJsonInit:
         self.obs_data["user_info"]["AAVSO Observer Code (N/A if none)"] = self.config.aavso_observer_code
 
         if self.config.flats:
-            self.observatory.obs_data["user_info"]["Directory of Flats"] = os.path.join(self.config.fits_files_dir, "flats")
+            self.obs_data["user_info"]["Directory of Flats"] = os.path.join(self.config.fits_files_dir, "flats")
         if self.config.darks:
             self.obs_data["user_info"]["Directory of Darks"] = os.path.join(self.config.fits_files_dir, "darks")
         if self.config.biases:

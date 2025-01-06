@@ -11,7 +11,7 @@ from PIL import Image
 
 import os
 # remove
-# os.environ["REQUESTS_CA_BUNDLE"] = "/Users/mgarrod/Development/certs/ca4.cer"
+os.environ["REQUESTS_CA_BUNDLE"] = "/Users/mgarrod/Development/certs/ca4.cer"
 
 def main():
     try:
@@ -47,19 +47,27 @@ def main():
         # remove this
         #fitsDir = "WASP-43 b"
 
+        config.fits_files_dir = os.path.join(config.fits_files_dir, fitsDir)
+
         # calibration
-        print("\nIf there are calibration FITS files, they need to be inside folders named: flats, darks, and biases. These folders should be inside the \"" + fitsDir + "\" directory.")
-        flats = input(f"Are there flat calibration images (default: no)? (y/n):")
-        if flats.lower() == "y" or flats.lower() == "yes":
+        if os.path.isdir(os.path.join(config.fits_files_dir, "flats")):
             config.flats = True
-        darks = input(f"Are there dark calibration images (default: no)? (y/n):")
-        if darks.lower() == "y" or darks.lower() == "yes":
+        if os.path.isdir(os.path.join(config.fits_files_dir, "darks")):
             config.darks = True
-        biases = input(f"Are there bias calibration images (default: no)? (y/n):")
-        if biases.lower() == "y" or biases.lower() == "yes":
+
+        if os.path.isdir(os.path.join(config.fits_files_dir, "biases")):
             config.biases = True
 
-        config.fits_files_dir = os.path.join(config.fits_files_dir, fitsDir)
+        # print("\nIf there are calibration FITS files, they need to be inside folders named: flats, darks, and biases. These folders should be inside the \"" + fitsDir + "\" directory.")
+        # flats = input(f"Are there flat calibration images (default: no)? (y/n):")
+        # if flats.lower() == "y" or flats.lower() == "yes":
+        #     config.flats = True
+        # darks = input(f"Are there dark calibration images (default: no)? (y/n):")
+        # if darks.lower() == "y" or darks.lower() == "yes":
+        #     config.darks = True
+        # biases = input(f"Are there bias calibration images (default: no)? (y/n):")
+        # if biases.lower() == "y" or biases.lower() == "yes":
+        #     config.biases = True
 
         # set output
         config.output_dir = os.path.join(config.fits_files_dir, "output")
