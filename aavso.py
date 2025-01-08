@@ -204,14 +204,12 @@ class AAVSO:
                 self.compmagarray = self.compmagarray.tolist()
 
                 indexes_to_remove = self.remove_close_points(self.comparray.copy(), 11)
-                self.comparray = [item for i, item in enumerate(self.comparray) if i not in indexes_to_remove]
-                self.compmagarray = [item for i, item in enumerate(self.compmagarray) if i not in indexes_to_remove]
+                if len(self.comparray) - \
+                        len(indexes_to_remove) >= 2:
+                    self.comparray = [item for i, item in enumerate(self.comparray) if i not in indexes_to_remove]
+                    self.compmagarray = [item for i, item in enumerate(self.compmagarray) if i not in indexes_to_remove]
 
-                if len(self.comparray) >= 2:
-                    return self.targetarray, self.comparray, self.compmagarray
-                else:
-                    print("Could not find enough comp stars")
-                    return None, None
+                return self.targetarray, self.comparray, self.compmagarray
 
             else:
                 print("Could not find enough comp stars")
