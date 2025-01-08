@@ -7,6 +7,7 @@ import requests
 import json
 import numpy as np
 import os
+import math
 
 class AAVSO:
     def __init__(self, config, starname, observatory, fitsFileObject):
@@ -55,6 +56,28 @@ class AAVSO:
         else:
             print("Failed to retrieve the AAVSO image.")
             return None
+
+    def distance(self, x1, y1, x2, y2):
+        return math.sqrt((x1 - x2) ** 2 + (y1 - y2) ** 2)
+
+    def remove_close_points(self, coords, min_distance):
+        indexes_to_remove = []
+        original_indexes = list(range(len(coords)))
+
+        while coords:
+            x1, y1 = coords.pop(0)
+            original_index = original_indexes.pop(0)
+
+            to_remove = []
+            for i, (x2, y2) in enumerate(coords):
+                if self.distance(x1, y1, x2, y2) < min_distance:
+                    to_remove.append(i)
+
+            for i in reversed(to_remove):
+                coords.pop(i)
+                indexes_to_remove.append(original_indexes.pop(i))
+
+        return indexes_to_remove
 
     def getFITSImage(self):
 
@@ -173,13 +196,22 @@ class AAVSO:
                     break
 
             if len(indexes) >= 2:
+
                 self.comparray = self.comparray[indexes]
                 self.comparray = self.comparray.tolist()
 
                 self.compmagarray = self.compmagarray[indexes]
                 self.compmagarray = self.compmagarray.tolist()
 
-                return self.targetarray, self.comparray, self.compmagarray
+                indexes_to_remove = self.remove_close_points(self.comparray.copy(), 11)
+                self.comparray = [item for i, item in enumerate(self.comparray) if i not in indexes_to_remove]
+                self.compmagarray = [item for i, item in enumerate(self.compmagarray) if i not in indexes_to_remove]
+
+                if len(self.comparray) >= 2:
+                    return self.targetarray, self.comparray, self.compmagarray
+                else:
+                    print("Could not find enough comp stars")
+                    return None, None
 
             else:
                 print("Could not find enough comp stars")
