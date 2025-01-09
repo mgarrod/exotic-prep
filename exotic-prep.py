@@ -81,7 +81,7 @@ def main():
             except:
                 print("Error creating output directory in " + config.fits_files_dir + ". Please verify your settings in config.ini are correct.")
 
-        # get planet data 
+        # get planet data
         initplanet = NASAExoplanetArchive(planet=planet)
         pDict = initplanet.planet_info()
         planetObj = initplanet.planet_info(fancy=True)
