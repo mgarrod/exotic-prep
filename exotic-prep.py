@@ -16,7 +16,7 @@ import os
 def main():
     try:
 
-        # load config file 
+        # load config file
         config = AstroConfig()
 
         # get minimal input for observatory and planet
