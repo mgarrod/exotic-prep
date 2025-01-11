@@ -159,6 +159,9 @@ class AAVSO:
 
             ra_deg, dec_deg = self.convert_to_decimal_degrees(target_ra, target_dec)
             x, y = wcs.all_world2pix(ra_deg, dec_deg, 0)
+            if math.isnan(x) or math.isnan(y):
+                print("Unable to get x,y coordinates for target star. Please make sure the first image is acceptable and " + self.starname + " is in the field of view.")
+                exit(0)
             self.targetarray.append(int(np.round(x)))
             self.targetarray.append(int(np.round(y)))
 
@@ -170,6 +173,8 @@ class AAVSO:
                         if band["band"] == "V":
                             ra_deg, dec_deg = self.convert_to_decimal_degrees(compstar["ra"], compstar["dec"])
                             x, y = wcs.all_world2pix(ra_deg, dec_deg, 0)
+                            if math.isnan(x) or math.isnan(y):
+                                continue
                             if int(np.round(x)) > 0 and int(np.round(y)) > 0 and int(np.round(x)) < width and int(
                                     np.round(y)) < height:
                                 self.comparray.append([int(np.round(x)), int(np.round(y))])

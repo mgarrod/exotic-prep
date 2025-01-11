@@ -6,6 +6,7 @@ from exoticjsoninit import ExoticJsonInit
 from fitsfile import FitsFile
 from aavso import AAVSO
 
+import traceback
 import json
 from PIL import Image
 
@@ -165,6 +166,7 @@ def main():
 
     except Exception as e:
         print("Error in exotic-prep: " + str(e))
+        traceback.print_exc()
 
 if __name__ == "__main__":
     main()
