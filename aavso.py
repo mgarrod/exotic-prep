@@ -87,8 +87,11 @@ class AAVSO:
         comparraytmp = self.comparray
         comparraytmp.insert(0, self.targetarray)
 
+        compmagarraytmp = self.compmagarray
+        compmagarraytmp.insert(0, -1)
+
         output_png = os.path.join(self.config.output_dir, self.starname + "_and_comp_coordinates.png")
-        self.fitsFileObject.convert_fits_to_png_with_markers(output_png, comparraytmp, comparraycolor, self.compmagarray, self.starname)
+        self.fitsFileObject.convert_fits_to_png_with_markers(output_png, comparraytmp, comparraycolor, compmagarraytmp, self.starname)
         #print(f"Target and Comp Star image saved as {output_png}")
 
         return output_png
