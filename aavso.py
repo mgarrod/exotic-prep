@@ -45,7 +45,12 @@ class AAVSO:
 
     def getAAVSOChartImagePath(self):
 
-        response = requests.get(self.aavso_chart_url)
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36',
+            'Accept-Language': 'en-US,en;q=0.9',
+            'Accept-Encoding': 'gzip, deflate, br',
+        }
+        response = requests.get(self.aavso_chart_url, headers=headers)
         if response.status_code == 200:
             aavso_outfile = os.path.join(self.config.output_dir, "AAVSO_" + self.starname + "_Chart.jpg")
             with open(aavso_outfile, "wb") as file:
