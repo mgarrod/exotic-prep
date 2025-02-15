@@ -108,7 +108,7 @@ class AAVSO:
 
         aavsourl = "https://apps.aavso.org/vsp/api/chart/?star=" + self.starname + "&scale=" + self.observatory.scale + "&orientation=CCD&type=chart&fov=" + str(
             self.observatory.fov) + "&maglimit=" + str(self.observatory.maglimit) + "&resolution=" + str(
-            self.observatory.resolution) + "&north=down&east=left&lines=True&format=json"
+            self.observatory.resolution) + "&north=up&east=left&lines=True&format=json"
         headers = {
             'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36',
             'Accept-Language': 'en-US,en;q=0.9',
