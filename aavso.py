@@ -171,6 +171,9 @@ class AAVSO:
             self.compmagarray = []
 
             ra_deg, dec_deg = self.convert_to_decimal_degrees(target_ra, target_dec)
+            print("AAVSO debug")
+            print(ra_deg)
+            print(dec_deg)
             x, y = wcs.all_world2pix(ra_deg, dec_deg, 0)
             if math.isnan(x) or math.isnan(y) or x < 0 or y < 0 or x > width or y > height:
                 print("Unable to get x,y coordinates for target star. Please make sure the first image is acceptable and " + self.starname + " is in the field of view.")
