@@ -69,7 +69,7 @@ class FitsFile:
                    facecolor='lightgrey', bbox_to_anchor=(1.15, 1.15))
 
         # Display the FITS image data
-        plt.imshow(image_data, norm=norm, origin='lower', cmap='gray_r')
+        plt.imshow(image_data, norm=norm, origin='upper', cmap='gray_r')
 
         # Draw horizontal and vertical lines every 100 pixels
         for y in range(0, height, 100):
