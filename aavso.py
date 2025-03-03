@@ -45,7 +45,12 @@ class AAVSO:
 
     def getAAVSOChartImagePath(self):
 
-        response = requests.get(self.aavso_chart_url)
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36',
+            'Accept-Language': 'en-US,en;q=0.9',
+            'Accept-Encoding': 'gzip, deflate, br',
+        }
+        response = requests.get(self.aavso_chart_url, headers=headers)
         if response.status_code == 200:
             aavso_outfile = os.path.join(self.config.output_dir, "AAVSO_" + self.starname + "_Chart.jpg")
             with open(aavso_outfile, "wb") as file:
@@ -103,8 +108,13 @@ class AAVSO:
 
         aavsourl = "https://apps.aavso.org/vsp/api/chart/?star=" + self.starname + "&scale=" + self.observatory.scale + "&orientation=CCD&type=chart&fov=" + str(
             self.observatory.fov) + "&maglimit=" + str(self.observatory.maglimit) + "&resolution=" + str(
-            self.observatory.resolution) + "&north=down&east=left&lines=True&format=json"
-        aavsores = requests.get(aavsourl)
+            self.observatory.resolution) + "&north=up&east=left&lines=True&format=json"
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/111.0.0.0 Safari/537.36',
+            'Accept-Language': 'en-US,en;q=0.9',
+            'Accept-Encoding': 'gzip, deflate, br',
+        }
+        aavsores = requests.get(aavsourl, headers=headers)
 
         aavso = None
         try:
@@ -161,8 +171,11 @@ class AAVSO:
             self.compmagarray = []
 
             ra_deg, dec_deg = self.convert_to_decimal_degrees(target_ra, target_dec)
+            print("AAVSO debug")
+            print(ra_deg)
+            print(dec_deg)
             x, y = wcs.all_world2pix(ra_deg, dec_deg, 0)
-            if math.isnan(x) or math.isnan(y):
+            if math.isnan(x) or math.isnan(y) or x < 0 or y < 0 or x > width or y > height:
                 print("Unable to get x,y coordinates for target star. Please make sure the first image is acceptable and " + self.starname + " is in the field of view.")
                 exit(0)
             self.targetarray.append(int(np.round(x)))
