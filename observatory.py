@@ -18,6 +18,13 @@ class Observatory:
                 "scale": "D"
             },
             2: {
+                "observatoryJson": "fortyeightforest.json",
+                "fov": 30,
+                "maglimit": 15,
+                "resolution": 150,
+                "scale": "E"
+            },
+            3: {
                 "observatoryJson": "cas.json",
                 "fov": -1,
                 "maglimit": -1,

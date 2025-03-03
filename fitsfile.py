@@ -15,17 +15,25 @@ class FitsFile:
         files = os.listdir(directory)
         files.sort()
         for filename in files:
-            if filename.endswith('.gz'):
+            if filename.endswith('.gz') or filename.endswith('.fit'):
                 self.first_fits_file = os.path.join(directory, filename)
                 return self.first_fits_file
         return None
 
     def get_observation_date(self):
         date_format = "%Y-%m-%dT%H:%M:%S.%f%z"
+        date_format2 = "%Y-%m-%dT%H:%M:%S.%f"
         header = self.get_fits_header()
 
         observation_date = header.get('DATE-OBS')
-        observation_date = datetime.strptime(observation_date, date_format)
+        tmp_observation_date = observation_date
+        try:
+            observation_date = datetime.strptime(observation_date, date_format)
+        except:
+            try:
+                observation_date = datetime.strptime(observation_date, date_format2)
+            except:
+                print("Error getting observation date from FITS header: " + tmp_observation_date)
         return observation_date.strftime("%Y-%m-%d")
 
     def get_fits_header(self):

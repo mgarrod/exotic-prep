@@ -12,7 +12,7 @@ from PIL import Image
 
 import os
 # remove
-#os.environ["REQUESTS_CA_BUNDLE"] = "/home/exotic/exoplanetdata/ca4.cer"
+#os.environ["REQUESTS_CA_BUNDLE"] = "/Users/mgarrod/Development/certs/ca4.cer"
 
 def main():
     try:
@@ -23,7 +23,7 @@ def main():
         # get minimal input for observatory and planet
 
         # observatory data for json and aavso url
-        obs_number = input(f"\nObservatories:\n          1. Whipple (default)\n\nChoose an observatory:")
+        obs_number = input(f"\nObservatories:\n          1. Whipple (default)\n          2. 48 Forest (Matt G)\n\nChoose an observatory:")
         try:
             obs_number = int(obs_number)
         except:
@@ -160,7 +160,7 @@ def main():
                 print("###########################################################")
 
             else:
-                print("No .gz file found in the directory")
+                print("No .gz or .fit file found in the directory")
         else:
             print("Error getting observatory information")
 
