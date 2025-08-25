@@ -29,7 +29,7 @@ class Observatory:
                 "fov": -1,
                 "maglimit": -1,
                 "resolution": -1,
-                "scale": "F"
+                "scale": "E"
             },
             4: {
                 "observatoryJson": "cas.json",
