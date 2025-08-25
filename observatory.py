@@ -26,10 +26,10 @@ class Observatory:
             },
             3: {
                 "observatoryJson": "moeller.json",
-                "fov": -1,
-                "maglimit": -1,
-                "resolution": -1,
-                "scale": "E"
+                "fov": 18.5,
+                "maglimit": 20,
+                "resolution": 150,
+                "scale": "F"
             },
             4: {
                 "observatoryJson": "cas.json",
