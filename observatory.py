@@ -32,6 +32,13 @@ class Observatory:
                 "scale": "F"
             },
             4: {
+                "observatoryJson": "jeffrod.json",
+                "fov": 30,
+                "maglimit": 15,
+                "resolution": 150,
+                "scale": "E"
+            },
+            5: {
                 "observatoryJson": "cas.json",
                 "fov": -1,
                 "maglimit": -1,
