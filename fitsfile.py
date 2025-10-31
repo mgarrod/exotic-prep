@@ -15,7 +15,7 @@ class FitsFile:
         files = os.listdir(directory)
         files.sort()
         for filename in files:
-            if filename.endswith('.gz') or filename.endswith('.fit') or filename.endswith('.fits'):
+            if filename.lower().endswith('.gz') or filename.lower().endswith('.fit') or filename.lower().endswith('.fits'):
                 self.first_fits_file = os.path.join(directory, filename)
                 return self.first_fits_file
         return None
